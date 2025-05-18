@@ -68,9 +68,32 @@ const excludedOriginalItemIds = [
 // Filtern der verbleibenden Gegenstände für die "Weiterer Gegenstand" Liste
 const otherItems = allItems.filter(item => !excludedOriginalItemIds.includes(item.id));
 
+// Liste der Vergleichsobjekte mit Gewichten in Gramm
+const comparisonObjects = [
+    { name: 'ein Smartphone', weight: 200 },
+    { name: 'eine Packung Butter (250g)', weight: 250 },
+    { name: 'einige Äpfel (ca. 500g)', weight: 500 },
+    { name: 'eine Tüte Mehl (1kg)', weight: 1000 },
+    { name: 'ein kleiner Laptop', weight: 1700 }, // Kann als Vergleich dienen, auch wenn im Formular
+    { name: 'eine Katze (mittelgroß)', weight: 4000 },
+    { name: 'ein Sack Kartoffeln (5kg)', weight: 5000 },
+    { name: 'eine Bowlingkugel', weight: 5500 },
+    { name: 'ein kleiner Hund', weight: 7500 },
+    { name: 'ein Handgepäckkoffer (gefüllt)', weight: 10000 },
+    { name: 'ein großer Koffer (gefüllt)', weight: 20000 },
+    { name: 'ein Sack Zement (25kg)', weight: 25000 },
+    { name: 'ein kleiner Kühlschrank', weight: 40000 },
+    { name: 'ein Erwachsener Mensch', weight: 75000 },
+    { name: 'ein Motorroller', weight: 100000 } // Beispiel für sehr schwer
+];
+
 // Container für dynamisch hinzugefügte Felder
 const otherItemsContainer = document.getElementById('other-items-container');
 const maxItemsMessage = document.getElementById('max-items-message');
+const resetButton = document.getElementById('resetForm');
+const totalWeightSpan = document.getElementById('totalWeight');
+const comparisonDiv = document.getElementById('comparison');
+
 
 const maxOtherItemFields = 11; // 1 initial + 10 zusätzlich
 let currentOtherItemFields = 0;
@@ -149,14 +172,14 @@ function addNewOtherItemSelectField() {
 }
 
 
-// --- Funktion zum Zurücksetzen des Formulars ---
+// Funktion zum Zurücksetzen des Formulars
 function resetMonsterBagForm() {
     // 1. Reset static form fields using the built-in form.reset()
     const form = document.getElementById('monsterBagForm');
     form.reset();
 
     // 2. Remove all dynamically added "Weiterer Gegenstand" fields except the first one
-    // Loop while there's more than 1 child (the initial one)
+    // Loop while there's more than 0 children (remove all)
     while (otherItemsContainer.children.length > 0) {
         otherItemsContainer.removeChild(otherItemsContainer.lastChild);
     }
@@ -173,15 +196,13 @@ function resetMonsterBagForm() {
     maxItemsMessage.textContent = ''; // Clear message text
 
     // 6. Reset the result display
-    const totalWeightSpan = document.getElementById('totalWeight');
-    const comparisonDiv = document.getElementById('comparison');
     totalWeightSpan.textContent = '0';
     comparisonDiv.textContent = ''; // Inhalt leeren
 }
 
 
 // Event Listener für den Reset Button
-document.getElementById('resetForm').addEventListener('click', resetMonsterBagForm);
+resetButton.addEventListener('click', resetMonsterBagForm);
 
 
 // Sobald das DOM geladen ist, das erste "Weiterer Gegenstand" Feld hinzufügen
@@ -227,26 +248,24 @@ document.getElementById('calculateWeight').addEventListener('click', function() 
 
 
     // Gesamtgewicht anzeigen
-    document.getElementById('totalWeight').textContent = totalWeight;
+    totalWeightSpan.textContent = totalWeight;
 
-    // Vergleichsobjekt finden und anzeigen (vereinfacht)
-    const comparisonDiv = document.getElementById('comparison');
-    let comparisonObject = "ein paar Äpfel."; // Default für sehr leicht
+    // --- Verbesserten Vergleich finden ---
+    let closestObject = null;
+    let minDifference = Infinity;
 
-    // Die Vergleichsbereiche können beibehalten oder angepasst werden
-    if (totalWeight > 500 && totalWeight <= 2000) {
-        comparisonObject = "eine Tüte Mehl (1kg) oder ein kleiner Laptop.";
-    } else if (totalWeight > 2000 && totalWeight <= 5000) {
-        comparisonObject = "einen Sack Kartoffeln (5kg) oder eine Bowlingkugel.";
-    } else if (totalWeight > 5000 && totalWeight <= 10000) {
-         comparisonObject = "einen mittelgroßen Hund oder einen Handgepäckkoffer.";
-    } else if (totalWeight > 10000 && totalWeight <= 20000) {
-         comparisonObject = "einen Sack Zement (25kg) oder einen großen Koffer.";
-    } else if (totalWeight > 20000) {
-        comparisonObject = "einen kleinen Kühlschrank oder einen Erwachsenen.";
-    } else { // Für sehr geringes Gewicht (<= 500g)
-         comparisonObject = "eine halbe Packung Butter oder ein Smartphone.";
+    comparisonObjects.forEach(obj => {
+        const difference = Math.abs(totalWeight - obj.weight);
+        if (difference < minDifference) {
+            minDifference = difference;
+            closestObject = obj;
+        }
+    });
+
+    // Ergebnis anzeigen
+    if (closestObject) {
+        comparisonDiv.textContent = `Das ist ungefähr so schwer wie ${closestObject.name} (ca. ${closestObject.weight}g).`;
+    } else {
+        comparisonDiv.textContent = 'Kein passendes Vergleichsobjekt gefunden.'; // Fallback
     }
-
-    comparisonDiv.textContent = `Das ist ungefähr so schwer wie ${comparisonObject}`;
 });
