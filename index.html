@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>the heavy, heavy Monster bag</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="monster_bag.png" alt="The Heavy, Heavy Monster Bag Icon" class="monster-bag-graphic">
+            <h1>the heavy, heavy Monster bag</h1>
+        </header>
+
+        <form id="monsterBagForm">
+            <h2>Inhalt deiner Tasche:</h2>
+
+            <div class="form-item">
+                <label for="laptop">Laptop:</label>
+                <select id="laptop" data-weight="1700">
+                    <option value="0">Kein Laptop</option>
+                    <option value="1">Ja (ca. 1.7 kg)</option>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <label for="books">Bücher / Notizbücher:</label>
+                <input type="number" id="books" value="0" min="0" data-weight-per-unit="400">
+                <span>Stück (ca. 400g pro Stück)</span>
+            </div>
+
+            <div class="form-item">
+                <label for="waterBottle">Wasserflasche (1L gefüllt):</label>
+                <input type="number" id="waterBottle" value="0" min="0" data-weight-per-unit="1100">
+                <span>Stück (ca. 1.1 kg pro Stück)</span>
+            </div>
+
+             <div class="form-item">
+                <label for="smartphone">Smartphone:</label>
+                <select id="smartphone" data-weight="200">
+                     <option value="0">Keines</option>
+                    <option value="1">Ja (ca. 200g)</option>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <label for="powerbank">Powerbank:</label>
+                <select id="powerbank" data-weight="300">
+                     <option value="0">Keine</option>
+                    <option value="1">Ja (ca. 300g)</option>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <label for="headphones">Kopfhörer (In-Ear/klein):</label>
+                <select id="headphones" data-weight="70">
+                     <option value="0">Keine</option>
+                    <option value="1">Ja (ca. 70g)</option>
+                </select>
+            </div>
+
+             <div class="form-item">
+                <label for="wallet">Geldbörse:</label>
+                <select id="wallet" data-weight="150">
+                     <option value="0">Keine</option>
+                    <option value="1">Ja (ca. 150g)</option>
+                </select>
+            </div>
+
+             <div class="form-item">
+                <label for="keys">Schlüsselbund:</label>
+                <select id="keys" data-weight="100">
+                     <option value="0">Keiner</option>
+                    <option value="1">Ja (ca. 100g)</option>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <label for="snacks">Snacks (z.B. Riegel):</label>
+                <input type="number" id="snacks" value="0" min="0" data-weight-per-unit="80">
+                <span>Stück (ca. 80g pro Stück)</span>
+            </div>
+
+             <div class="form-item">
+                <label for="umbrella">Faltregenschirm:</label>
+                <select id="umbrella" data-weight="300">
+                     <option value="0">Keiner</option>
+                    <option value="1">Ja (ca. 300g)</option>
+                </select>
+            </div>
+
+             <div class="form-item">
+                <label for="lunch">Mittagessen (im Behälter):</label>
+                <select id="lunch" data-weight="700">
+                     <option value="0">Keines</option>
+                    <option value="1">Ja (ca. 700g)</option>
+                </select>
+            </div>
+
+             <div class="form-item">
+                <label for="penPencilCase">Stifte / Etui (vereinfacht):</label>
+                <select id="penPencilCase" data-weight="100">
+                     <option value="0">Keines</option>
+                    <option value="1">Ja (ca. 100g)</option>
+                </select>
+            </div>
+
+             <div class="form-item">
+                <label for="tissues">Taschentücher (Pckg):</label>
+                <input type="number" id="tissues" value="0" min="0" data-weight-per-unit="40">
+                <span>Stück (ca. 40g pro Stück)</span>
+            </div>
+
+            <div id="other-items-container">
+                </div>
+
+            <div id="max-items-message" class="form-item" style="display: none;">
+                 </div>
+
+            <button type="button" id="resetForm">Formular zurücksetzen</button>
+            <button type="button" id="calculateWeight">Gewicht berechnen</button>
+        </form>
+
+        <div id="result" class="result">
+            <h2>Ergebnis:</h2>
+            <p>Gesamtgewicht: <span id="totalWeight">0</span> g</p>
+            <div id="comparison">
+                </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

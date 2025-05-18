@@ -1,0 +1,292 @@
+/* ... (Vorheriges CSS bleibt gleich) ... */
+
+/* Styling für den Reset Button */
+#resetForm {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #95a5a6; /* Grauton */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    margin-top: 25px; /* Abstand nach oben */
+    margin-bottom: 15px; /* Abstand nach unten zum nächsten Button */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+#resetForm:hover {
+    background-color: #7f8c8d; /* Dunkler bei Hover */
+}
+#resetForm:active {
+     transform: translateY(1px);
+}
+
+/* Den Berechnen Button etwas nach unten verschieben, falls nötig, um Platz zu machen */
+button#calculateWeight {
+     margin-top: 0; /* Vorheriges Margin oben entfernen, da Reset Button jetzt Abstand gibt */
+}
+
+
+/* Restliches CSS von vorher (Farbpalette, Schriftarten, Layout, Formularfelder, etc.) */
+:root {
+    --primary-blue: #005BBB; /* Ein Blau inspiriert von HPI */
+    --secondary-green: #4CAF50; /* Ein sauberes Grün für Aktionen */
+    --text-color: #333;
+    --light-grey: #eee;
+    --medium-grey: #ccc;
+    --dark-grey: #555;
+    --background-light: #f8f8f8;
+    --container-bg: #ffffff;
+    --border-color: #ddd;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif; /* Hauptschriftart */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0; /* Full height handling */
+    background-color: var(--background-light);
+    color: var(--text-color);
+    min-height: 100vh; /* Mindestens volle Bildschirmhöhe */
+    display: flex; /* Für Zentrierung/Layout */
+    justify-content: center; /* Horizontal zentrieren */
+    align-items: flex-start; /* Oben starten */
+    padding: 20px 10px; /* Padding für Ränder */
+}
+
+.container {
+    width: 100%; /* Volle Breite bis max-width */
+    max-width: 700px;
+    margin: 0 auto; /* Zentrieren */
+    background: var(--container-bg);
+    padding: 30px;
+    border-radius: 8px; /* Sanftere Ecken */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Dezenterer Schatten */
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--light-grey); /* Trennlinie */
+}
+
+.monster-bag-graphic {
+    display: block;
+    margin: 0 auto 15px auto;
+    max-width: 120px; /* Etwas kleiner */
+    height: auto;
+    opacity: 0.8; /* Leicht transparent */
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif; /* Schriftart für Titel */
+    text-align: center;
+    color: var(--primary-blue);
+    font-size: 2rem;
+    margin-bottom: 0;
+    font-weight: 700; /* Fetter */
+}
+
+h2 {
+    font-family: 'Poppins', sans-serif; /* Schriftart für Untertitel */
+    text-align: center;
+    color: var(--text-color);
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    position: relative; /* Für Unterstrich Effekt */
+    padding-bottom: 8px;
+}
+/* Dezenter Unterstrich für h2 */
+h2::after {
+    content: '';
+    display: block;
+    width: 50px; /* Kurze Linie */
+    height: 3px;
+    background-color: var(--secondary-green); /* Akzentfarbe */
+    margin: 8px auto 0 auto; /* Zentrieren */
+    border-radius: 2px;
+}
+
+.form-item {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px 0; /* Dezenteres Padding, kein Hintergrund/Border pro Item */
+    border-bottom: 1px dashed var(--light-grey); /* Leichte Trennung */
+}
+.form-item:last-of-type {
+    border-bottom: none; /* Kein Border am letzten Item */
+}
+
+
+.form-item label {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 600;
+    flex-basis: 220px; /* Mehr Platz für Labels */
+    margin-right: 20px;
+    color: var(--dark-grey);
+    flex-shrink: 0; /* Label soll nicht schrumpfen */
+}
+
+.form-item input[type="number"],
+.form-item select {
+    flex-grow: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px; /* Weniger abgerundet */
+    font-size: 1rem;
+    max-width: 100px; /* Etwas breiter für Mengen */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: var(--container-bg);
+}
+
+.form-item select {
+     max-width: 200px; /* Breiter für Dropdowns */
+     cursor: pointer;
+}
+
+.form-item input[type="number"]:focus,
+.form-item select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 5px rgba(0, 91, 187, 0.2); /* Schatten in Akzentfarbe */
+    outline: none;
+}
+/* Disabled select styling */
+.form-item select:disabled {
+    background-color: var(--background-light);
+    color: var(--dark-grey);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+.form-item span {
+    margin-left: 10px;
+    color: var(--dark-grey);
+    font-size: 0.9rem;
+    flex-shrink: 0; /* Einheit soll nicht schrumpfen */
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    /* background-color: var(--secondary-green); */ /* Farbe wird spezifisch im #calculateWeight gesetzt */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* margin-top: 30px; */ /* Wird von #resetForm oder spezifisch gesetzt */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+button#calculateWeight {
+     background-color: var(--secondary-green);
+     margin-top: 15px; /* Abstand nach oben */
+}
+button#calculateWeight:hover {
+     background-color: #44a049; /* Manuell dunkler */
+}
+button:active {
+    transform: translateY(1px);
+}
+
+.result {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid var(--light-grey); /* Saubere Trennlinie */
+    text-align: center;
+}
+
+.result h2 {
+    color: var(--primary-blue); /* Ergebnis Überschrift in Primärfarbe */
+}
+.result h2::after {
+     background-color: var(--primary-blue); /* Akzentlinie in Primärfarbe */
+}
+
+.result p {
+    font-size: 1.5rem; /* Etwas größer */
+    font-weight: 700; /* Fetter */
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+#comparison {
+    margin-top: 15px; /* Mehr Abstand */
+    font-style: normal; /* Kein Kursiv */
+    color: var(--dark-grey);
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* Styling für die maximale Meldung */
+#max-items-message {
+    text-align: center;
+    margin-top: 20px;
+    padding: 12px;
+    border: 1px solid #e74c3c; /* Rot */
+    border-radius: 4px;
+    background-color: #fdedec; /* Helleres Rot */
+    color: #c0392b; /* Dunkleres Rot */
+    font-weight: 600;
+    display: none; /* Standardmäßig ausgeblendet */
+}
+
+
+/* Responsiveness beibehalten und anpassen */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+     h1 {
+        font-size: 1.8rem;
+     }
+     h2 {
+        font-size: 1.2rem;
+     }
+    .form-item {
+        flex-direction: column; /* Stack items vertically */
+        align-items: flex-start; /* Align to the left */
+    }
+    .form-item label {
+        flex-basis: auto; /* Auto width */
+        margin-right: 0;
+        margin-bottom: 5px; /* Space below label */
+        width: 100%; /* Take full width */
+    }
+    .form-item input[type="number"],
+    .form-item select {
+         max-width: 100%; /* Full width */
+         margin-bottom: 5px; /* Space below input/select */
+    }
+     .form-item span {
+        width: 100%; /* Take full width */
+        text-align: left; /* Align unit to the left */
+        margin-left: 0;
+        font-size: 0.8rem;
+        color: var(--dark-grey); /* Color might be inherited */
+     }
+     .form-item:last-of-type span {
+         margin-bottom: 0; /* No extra space after last unit */
+     }
+     button {
+        font-size: 1rem;
+     }
+     .result p {
+         font-size: 1.3rem;
+     }
+}
